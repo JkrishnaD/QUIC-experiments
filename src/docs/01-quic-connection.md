@@ -153,9 +153,10 @@ streams will feel magical and confusing.
 
 ## Key Observations
 
-![QUIC Connection Lifecycle](/Users/jayakrishna/Documents/networking/experiments/src/docs/outputs/connections.png)
+<img width="824" height="178" alt="image" src="https://github.com/user-attachments/assets/b325e69a-3b9d-4534-997d-af7799d0f057" />
 
-*Figure: A QUIC connection's lifecycle showing establishment, stream multiplexing, and graceful closure*
+
+*Figure: A QUIC connection's lifecycle showing establishment*
 - A QUIC connection can be fully established without creating any streams.
 - Connection establishment occurs before any application-level data exchange.
 - TLS encryption is mandatory and implicit; no plaintext phase exists.
