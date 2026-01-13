@@ -209,12 +209,43 @@ send.finish().await?;
 
 ---
 
-## Key Takeaways
+## Observations from Experiment
 
-- **Streams are QUIC's killer feature** - They enable true transport-level multiplexing
-- **HOL blocking is eliminated** - Only within individual streams, not across them
-- **HTTP/2 over TCP still suffers HOL blocking** - QUIC (HTTP/3) solves this fundamentally
-- **Streams are cheap** - Create them freely for logical separation
-- **Independent flow control and retransmission** - Each stream progresses independently
+- Multiple bidirectional streams were opened concurrently over a single QUIC connection.
+- Streams were accepted by the server in a non-deterministic order.
+- Data chunks from different streams arrived interleaved in time.
+- Each stream maintained its own independent byte offset sequence.
+- Stream completion times varied based on per-stream behavior.
+- Slower streams did not block faster streams from making progress.
 
-Understanding streams is essential to understanding why QUIC exists and when to use it.
+### Ordering Guarantees
+
+Even when multiple streams transmit data with identical delays,  
+the order in which chunks arrive across streams is not deterministic.
+
+This is expected behavior.
+
+QUIC guarantees:
+- reliable, ordered delivery **within a single stream**
+
+QUIC does **not** guarantee:
+- ordering across streams
+- fairness between streams
+- deterministic arrival order
+
+### Why This Happens
+
+Cross-stream ordering can be affected by:
+- async runtime wake-up order
+- QUIC stream scheduling
+- packet dispatch and buffering
+
+---
+
+### Conclusion
+
+This experiment confirms that QUIC provides **transport-native multiplexing**  
+and eliminates head-of-line blocking present in TCP-based protocols.
+
+Understanding stream independence is essential to understanding  
+why QUIC exists and when it should be used.
