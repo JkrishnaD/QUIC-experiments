@@ -43,12 +43,12 @@ async fn run_server() -> anyhow::Result<()> {
     Ok(())
 }
 
-struct TlsIdentity {
-    cert_chain: Vec<CertificateDer<'static>>,
-    private_key: PrivateKeyDer<'static>,
+pub struct TlsIdentity {
+    pub cert_chain: Vec<CertificateDer<'static>>,
+    pub private_key: PrivateKeyDer<'static>,
 }
 
-fn generate_certificate() -> anyhow::Result<TlsIdentity> {
+pub fn generate_certificate() -> anyhow::Result<TlsIdentity> {
     let cert_key = rcgen::generate_simple_self_signed(vec!["localhost".to_string()])?;
     let cert_chain = vec![cert_key.cert.der().clone()];
     let private_key_der = cert_key.signing_key.serialize_der();
@@ -91,7 +91,7 @@ async fn run_client() -> anyhow::Result<()> {
 }
 
 #[derive(Debug)]
-struct SkipServerVerification;
+pub struct SkipServerVerification;
 
 impl ServerCertVerifier for SkipServerVerification {
     fn verify_server_cert(
