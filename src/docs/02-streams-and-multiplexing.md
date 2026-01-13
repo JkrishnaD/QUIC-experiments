@@ -208,6 +208,10 @@ send.finish().await?;
 - Stream ID cannot be reused
 
 ---
+## Output from Experiment
+<img width="646" height="586" alt="image" src="https://github.com/user-attachments/assets/090939fe-ee70-47f6-9424-4c54c33d250e" />
+
+---
 
 ## Observations from Experiment
 
