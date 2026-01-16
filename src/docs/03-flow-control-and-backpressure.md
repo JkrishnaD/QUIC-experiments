@@ -130,6 +130,11 @@ This stimulates slow receiver
 - Data received by the server is not aligned with sender write boundaries.
 - The server may receive large contiguous byte chunks even if the client writes smaller chunks.
 
+---
+## Output
+
+<img width="500" height="590" alt="image" src="https://github.com/user-attachments/assets/f1263918-79ac-4670-9149-5557bfc4e7ba" /> <img src="https://github.com/user-attachments/assets/9c77f262-2cec-40de-8213-956e46fa37d9" width="500" height="600"/> 
+
 --- 
 
 ## Interpretation of the Output
