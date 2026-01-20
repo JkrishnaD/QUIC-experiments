@@ -264,15 +264,6 @@ Priority: urgency=3, incremental
 
 Servers implementing HTTP/3 priorities can schedule stream delivery accordingly.
 
-### QUIC Implementation Extensions
-
-Some QUIC implementations offer:
-- Stream weight configuration
-- Per-stream bandwidth limits
-- Custom scheduling policies
-
-Check your QUIC library's documentation (e.g., `quinn`, `quiche`, `msquic`).
-
 ---
 
 ## Real-World Implications
@@ -293,14 +284,6 @@ Check your QUIC library's documentation (e.g., `quinn`, `quiche`, `msquic`).
 1. **Batch processing** - All streams have similar requirements
 2. **Background sync** - No latency requirements
 3. **Single-stream applications** - No competition
-
-### Production Recommendations
-
-1. **Profile your application** - Measure actual starvation occurrence
-2. **Separate by latency class** - Interactive vs bulk on different connections
-3. **Implement application-level fairness** - Don't rely on transport alone
-4. **Monitor stream metrics** - Track per-stream latency and throughput
-5. **Use HTTP/3 priorities if applicable** - Leverage existing standards
 
 ---
 
@@ -326,16 +309,6 @@ Check your QUIC library's documentation (e.g., `quinn`, `quiche`, `msquic`).
 - **Design for starvation** - Implement mitigation strategies proactively
 - **Measure in production** - Starvation may only appear under load
 - **Consider connection topology** - Sometimes separate connections are the answer
-
-### Design Principles
-
-When building QUIC applications:
-
-✓ **Identify latency classes** - Which streams are time-sensitive?  
-✓ **Implement rate limiting** - Prevent aggressive streams from dominating  
-✓ **Use priorities where available** - Leverage HTTP/3 or custom schemes  
-✓ **Monitor fairness metrics** - Make starvation observable  
-✓ **Test under contention** - Don't just test idle scenarios  
 
 ---
 
